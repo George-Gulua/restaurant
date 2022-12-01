@@ -5,8 +5,6 @@ const { StatusCode } = require('status-code-enum')
 const User = require('../models/user');
 
 module.exports = async function (req, res) {
-    console.log(req.body);
-
     if (req.body) {
 
         const token = req.body.jwt;
