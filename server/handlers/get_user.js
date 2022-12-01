@@ -16,6 +16,6 @@ module.exports = async function (req, res) {
             }
         }
     }
-
+    
     res.status(StatusCode.ClientErrorBadRequest).json();
 }
