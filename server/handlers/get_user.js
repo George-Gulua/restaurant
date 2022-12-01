@@ -2,8 +2,6 @@
 const jwt = require("jsonwebtoken");
 const { StatusCode } = require('status-code-enum')
 
-const User = require('../models/user');
-
 module.exports = async function (req, res) {
     if (req.body) {
 
