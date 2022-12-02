@@ -43,7 +43,7 @@ module.exports = function main(options, cb) {
         }
 
         dotenv.config();
-        sync();
+        // sync();
 
         const addr = server.address();
         logger.info(
