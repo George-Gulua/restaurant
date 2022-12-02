@@ -4,9 +4,8 @@
       <form class="form" @submit.prevent="handleSubmit">
         <span class="form__title">Регистрация</span>
         <div class="register-form">
-          <input v-model="name" type="text" placeholder="Имя" required>
-          <input v-model="lastName" type="text" placeholder="Фамилия" required>
-          <input v-model="phone" type="number" placeholder="Телефон" required>
+          <input v-model="first_name" type="text" placeholder="Имя" required>
+          <input v-model="last_name" type="text" placeholder="Фамилия" required>
           <input v-model="login" type="text" placeholder="Логин" required>
           <input v-model="password" type="password" placeholder="Пароль" required>
           <button>Зарегистрироваться</button>
@@ -17,27 +16,26 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
   name: 'RegisterPage',
   data() {
     return {
-      name: '',
-      lastName: '',
-      phone: '',
+      first_name: '',
+      last_name: '',
       login: '',
       password: ''
     }
   },
   methods: {
     handleSubmit() {
-      const data = {
-        name: this.name,
-        lastName: this.lastName,
-        phone: this.phone,
+      axios.post('http://localhost:8000/signup', {
+        first_name: this.first_name,
+        last_name: this.last_name,
         login: this.login,
         password: this.password
-      }
-      console.log(data)
+      })
       this.$router.push('/login')
     }
   }

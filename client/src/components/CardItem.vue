@@ -1,19 +1,31 @@
 <template>
   <div class="card">
-    <img class="card__img" src="@/assets/images/pizza.png" alt="изображение еды">
-    <h2 class="card__title">Пепперони</h2>
-    <p class="card__text">Пепперони - это очень вкусная пицца</p>
-    <button class="card__btn btn">Добавить</button>
+    <img class="card__img" :src="require(`@/assets/images/${product.path}`)" alt="изображение еды">
+    <h2 class="card__title">{{product.title}}</h2>
+    <p class="card__text">{{product.text}}</p>
+    <span class='card__price'>{{product.price}}Р</span>
+    <button class="card__btn btn" @click='addProduct()'>Добавить</button>
   </div>
 </template>
 
 <script>
 export default {
   name: 'CardItem',
+  props: {
+    product: {
+      type: Object,
+      required: true
+    }
+  },
+  methods: {
+    addProduct() {
+      this.$emit('addProduct',this.product)
+    }
+  }
 }
 </script>
 
-<style>
+<style lang='scss' scoped>
 .card {
   display: flex;
   align-items: center;
@@ -22,6 +34,6 @@ export default {
   gap: 20px;
   border-radius: 12px;
   background: #F1F1F1;
-  flex: 1 1 calc(33.33% - 40px);
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 </style>

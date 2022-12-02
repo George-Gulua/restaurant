@@ -17,6 +17,14 @@ export default new Router({
     {
       path: '/register',
       component: () => import('@/views/RegisterPage')
+    },
+    {
+      path: '/admin',
+      component: () => import('@/views/AdminPage')
+    },
+    {
+      path: '*',
+      component: () => import('@/views/LoginPage')
     }
   ]
 })

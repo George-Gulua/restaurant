@@ -14,6 +14,8 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
   name: 'LoginPage',
   data() {
@@ -23,14 +25,18 @@ export default {
     }
   },
   methods: {
-    handleSubmit() {
-      this.users.map(user => {
-        if (user.login === this.login && user.password === this.password) {
-          localStorage.setItem('token', user.token)
-          this.$store.dispatch('user', user)
-          this.$router.push('/')
-        }
+    async handleSubmit() {
+      const { data } = await axios.post('http://localhost:8000/authorize', {
+        login: this.login,
+        password: this.password
       })
+
+      const response = await axios.post('http://localhost:8000/getUser', {jwt: data.jwt})
+
+      localStorage.setItem('token', data.jwt)
+      localStorage.setItem('role', response.data.user.role)
+      await this.$store.dispatch('user', localStorage.getItem('role'))
+      await this.$router.push('/')
     }
   }
 }

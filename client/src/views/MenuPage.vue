@@ -3,41 +3,44 @@
     <div class="container">
       <h2 class="menu__title">Наше меню</h2>
       <div class="list-items">
-        <div class="card">
-          <img class="card__img" src="@/assets/images/pizza.png" alt="изображение еды">
-          <h2 class="card__title">Пепперони</h2>
-          <p class="card__text">Пепперони - это очень вкусная пицца</p>
-          <button class="card__btn btn">Добавить</button>
-        </div>
-        <div class="card">
-          <img class="card__img" src="@/assets/images/pizza.png" alt="изображение еды">
-          <h2 class="card__title">Пепперони</h2>
-          <p class="card__text">Пепперони - это очень вкусная пицца</p>
-          <button class="card__btn btn">Добавить</button>
-        </div>
-        <div class="card">
-          <img class="card__img" src="@/assets/images/pizza.png" alt="изображение еды">
-          <h2 class="card__title">Пепперони</h2>
-          <p class="card__text">Пепперони - это очень вкусная пицца</p>
-          <button class="card__btn btn">Добавить</button>
-        </div>
+        <card-item v-for='product in products' :key='product.id' :product='product' @addProduct='addProduct'/>
       </div>
+      <cart-menu v-if="cart.length" :cart_data='this.cart'/>
     </div>
   </div>
 </template>
 
 <script>
+import CardItem from '@/components/CardItem'
+import CartMenu from '@/components/CartMenu'
+import { mapActions, mapGetters } from 'vuex'
+
 export default {
   name: 'MenuPage',
+  components: {
+    CardItem: CardItem,
+    CartMenu: CartMenu
+  },
   data() {
     return {
-      dishes: [
-        {id: 0, title: 'Пепперони', text: 'Пепперони - это очень вкусная пицца'},
-        {id: 1, title: 'Пепперони', text: 'Пепперони - это очень вкусная пицца'},
-        {id: 2, title: 'Пепперони', text: 'Пепперони - это очень вкусная пицца'},
-        {id: 3, title: 'Пепперони', text: 'Пепперони - это очень вкусная пицца'},
+      products: [
+        {id: 0, title: 'Пепперони', text: 'Пепперони - это очень вкусная пицца', price: 550, path: 'pizza.png'},
+        {id: 1, title: 'Маргарита', text: 'Маргарита - это очень вкусная пицца', price: 450, path: 'pizza.png'},
+        {id: 2, title: 'Карбонара', text: 'Карбонара - это очень вкусная пицца', price: 350, path: 'pizza.png'}
       ]
     }
+  },
+  methods: {
+    ...mapActions([
+      'ADD_TO_CART'
+    ]),
+    addProduct(data) {
+      this.ADD_TO_CART(data)
+      console.log(this.cart)
+    }
+  },
+  computed: {
+    ...mapGetters(['cart'])
   }
 }
 </script>
@@ -54,17 +57,6 @@ export default {
   .list-items {
     display: flex;
     gap: 20px;
-  }
-
-  .card {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    padding: 20px;
-    gap: 20px;
-    border-radius: 12px;
-    background: #F1F1F1;
-    flex: 1 1 calc(33.33% - 40px);
   }
 }
 </style>

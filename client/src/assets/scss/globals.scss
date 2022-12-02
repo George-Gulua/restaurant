@@ -24,13 +24,13 @@ a {
 .btn {
   border: none;
   padding: 20px 44px;
-  background: #d39c72;
+  background: #212121;
   color: #F1F1F1;
   font-size: 18px;
   transition: .3s;
 
   &:hover {
-    background: #212121;
+    opacity: 0.7;
   }
 }
 
