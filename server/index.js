@@ -1,5 +1,6 @@
 'use strict';
 
+const cors = require("cors");
 const pino = require("pino");
 const dotenv = require("dotenv");
 const express = require("express");
@@ -20,6 +21,7 @@ module.exports = function main(options, cb) {
     const app = express();
 
     // Common middleware
+    app.use(cors());
     app.use(express.json());
 
     const logger = pino();

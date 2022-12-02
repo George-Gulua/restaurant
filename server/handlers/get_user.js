@@ -12,7 +12,7 @@ module.exports = async function (req, res) {
                 res.json(jwt.verify(token, process.env.TOKEN_SECRET));
                 return;
             } catch (error) {
-                console.log(`Wrong JWS token: ${token}`);
+                console.log(`Wrong JWS token on get_user: ${token}`);
             }
         }
     }

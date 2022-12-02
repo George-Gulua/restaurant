@@ -20,6 +20,9 @@ Order.init(
     { sequelize }
 );
 
-User.hasOne(Order);
+User.hasOne(Order, {
+        foreignKey: { allowNull: false },
+        onDelete: 'CASCADE',
+    });
 
 module.exports = Order;

@@ -1,4 +1,5 @@
 'use strict';
+const roles = require('../enum/roles');
 const { StatusCode } = require('status-code-enum')
 
 const User = require('../models/user');
@@ -20,7 +21,7 @@ module.exports = async function (req, res) {
                 last_name: data.last_name,
                 login: data.login,
                 password: data.password,
-                role: "user",
+                role: roles.USER,
             })
             .then((_user) => res.status(StatusCode.SuccessCreated).json())
             .catch((_reason) => res.status(StatusCode.ClientErrorBadRequest).json())

@@ -15,12 +15,19 @@ Cart.init(
         },
         product_quantity: {
             type: DataTypes.INTEGER,
+            allowNull: false
         }
     }, 
     { sequelize }
 );
 
-Order.hasOne(Cart);
-Product.hasOne(Cart);
+Order.hasOne(Cart, {
+        foreignKey: { allowNull: false },
+        onDelete: 'CASCADE',
+    });
+Product.hasOne(Cart, {
+        foreignKey: { allowNull: false },
+        onDelete: 'CASCADE',
+    });
 
 module.exports = Cart;
