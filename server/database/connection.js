@@ -1,11 +1,11 @@
 'use strict';
 const Sequelize = require('sequelize');
 const sequelize = new Sequelize(
-    'restaurant',
+    'MY_DATABASE',
     'root',
-    '',
+    'MYSQL_ROOT_PASSWORD',
     {
-        port: '3306',
+        port: '8806',
         dialect: 'mysql',
         define: {
             timestamps: false

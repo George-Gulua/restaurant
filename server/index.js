@@ -1,5 +1,4 @@
 'use strict';
-const cors = require('cors')
 
 const cors = require("cors");
 const pino = require("pino");
@@ -27,7 +26,6 @@ module.exports = function main(options, cb) {
 
     const logger = pino();
     app.use(pinoHttp({ logger }));
-    app.use(cors())
 
     // Register routes
     // @NOTE: require here because this ensures that even syntax errors
