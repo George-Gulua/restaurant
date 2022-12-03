@@ -14,6 +14,7 @@
 import CardItem from '@/components/CardItem'
 import CartMenu from '@/components/CartMenu'
 import { mapActions, mapGetters } from 'vuex'
+import axios from 'axios'
 
 export default {
   name: 'MenuPage',
@@ -23,12 +24,13 @@ export default {
   },
   data() {
     return {
-      products: [
-        {id: 0, title: 'Пепперони', text: 'Пепперони - это очень вкусная пицца', price: 550, path: 'pizza.png'},
-        {id: 1, title: 'Маргарита', text: 'Маргарита - это очень вкусная пицца', price: 450, path: 'pizza.png'},
-        {id: 2, title: 'Карбонара', text: 'Карбонара - это очень вкусная пицца', price: 350, path: 'pizza.png'}
-      ]
+      products: null
     }
+  },
+  async mounted() {
+    const { data } = await axios.get('http://localhost:8000/getProductsAll')
+    console.log(data)
+    this.products = data
   },
   methods: {
     ...mapActions([
@@ -57,6 +59,7 @@ export default {
   .list-items {
     display: flex;
     gap: 20px;
+    flex-wrap: wrap;
   }
 }
 </style>
