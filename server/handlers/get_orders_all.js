@@ -1,5 +1,5 @@
 'use strict';
-const { roles } = require('../enum/roles');
+const roles = require('../enum/roles');
 const { StatusCode } = require('status-code-enum');
 
 const Order = require('../models/order');
