@@ -24,4 +24,5 @@ module.exports = function (app, opts) {
     app.post('/verifyToken', verify_token);
     app.post('/removeOrder', remove_order);
     app.post('/removeProduct', remove_product);
+    
 }

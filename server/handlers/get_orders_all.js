@@ -6,12 +6,12 @@ const { StatusCode } = require('status-code-enum');
 const Order = require('../models/order');
 
 module.exports = async function (req, res) {
-    if (!req.body) {
+    if (!req.query) {
         res.status(StatusCode.ClientErrorBadRequest).json();
         return;
     }
 
-    const token = req.body.jwt;
+    const token = req.query.jwt;
 
     if (token) {
         try {
