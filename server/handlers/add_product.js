@@ -26,7 +26,7 @@ module.exports = async function (req, res) {
                     title: data.title,
                     description: data.description,
                     price: data.price,
-                    img_path: data.img_path,
+                    img: data.img,
                 })
                 .then((_product) => res.status(StatusCode.SuccessCreated).json())
                 .catch((_reason) => res.status(StatusCode.ClientErrorBadRequest).json())

@@ -23,10 +23,9 @@ Product.init(
             allowNull: false
         },
         img_path: {
-            type: DataTypes.STRING,
+            type: DataTypes.BLOB,
             allowNull: false
         }
-        
     }, 
     { sequelize }
 );

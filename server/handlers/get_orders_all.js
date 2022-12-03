@@ -22,7 +22,7 @@ module.exports = async function (req, res) {
                 return;
             }
 
-            res.status(StatusCode.SuccessOK).json(Order.findAll());
+            res.status(StatusCode.SuccessOK).json(await Order.findAll());
             return;
         } catch (error) {
             console.log(`Wrong JWS token on get_orders_all: ${token}`);
