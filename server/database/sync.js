@@ -9,13 +9,14 @@ const User = require('../models/user');
 const roles = require('../enum/roles');
 
 module.exports = () => {
-    sequelize.sync({force: true});
-
-    User.create({
-        first_name: 'admin',
-        last_name: 'admin',
-        login: 'admin',
-        password: 'admin',
-        role: roles.ADMIN
-    })
+    sequelize.sync({force: true})
+    .then(() => {
+        User.create({
+            first_name: 'admin',
+            last_name: 'admin',
+            login: 'admin',
+            password: 'admin',
+            role: roles.ADMIN
+        })
+    });
 }
