@@ -22,7 +22,7 @@ Product.init(
             type: DataTypes.INTEGER,
             allowNull: false
         },
-        img_path: {
+        img: {
             type: DataTypes.BLOB,
             allowNull: false
         }
