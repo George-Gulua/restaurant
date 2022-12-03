@@ -6,7 +6,7 @@
     </div>
     <div class='cart-item__quantity'>
       <p>Количество:</p>
-      {{cart_item.quantity}}
+      {{cart_item.product_quantity}}
     </div>
     <button class='cart-item__btn btn' @click='deleteFromCart'>Удалить</button>
   </div>
@@ -29,7 +29,7 @@ export default {
     }
   },
   mounted() {
-    this.$set(this.cart_item, 'quantity', 1)
+    this.$set(this.cart_item, 'product_quantity', 1)
   }
 }
 </script>

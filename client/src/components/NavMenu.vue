@@ -63,6 +63,7 @@ export default {
 
     &__item {
       color: #F1F1F1;
+      border-bottom: 1px solid #F1F1F1;
 
       &:hover {
         color: #d39c72;
