@@ -40,7 +40,7 @@
       <div class='orders'>
         <div class='order-menu'>
           <h2 class='admin__title'>Все заказы</h2>
-            <div class='order-menu__item' v-for='order in orders' :key='order.id'>
+            <div class='order-menu__item' v-for='order in orders' :key='order.order_id'>
               <div class='order-menu__all-info'>
                 <div class='order-menu__info'>
                   <p class='order-menu__title border-bottom'>ID заказа</p>
@@ -54,7 +54,7 @@
                   <p class='order-menu__description border-bottom'>Дата заказа</p>
                   <p class='order-menu__description'>{{order.creation_date}}</p>
                 </div>
-                <button class='delete-menu__btn btn' @click='deleteOrder(order.id)'>Удалить</button>
+                <button class='delete-menu__btn btn' @click='deleteOrder(order.order_id)'>Удалить</button>
               </div>
               <div class='order-menu__order-list' v-for='(product, index) in order.products' :key='index'>
                   <div class='order-menu__order-list-info'>
@@ -114,7 +114,7 @@ export default {
       this.products = data
     },
     async deleteProduct(id) {
-     await axios.post('http://localhost:8000/removeProduct', {
+      await axios.post('http://localhost:8000/removeProduct', {
           product_id: id,
           jwt: localStorage.getItem('token')
         }
@@ -122,8 +122,14 @@ export default {
       const { data } = await axios.get('http://localhost:8000/getProductsAll')
       this.products = data
     },
-    deleteOrder() {
-
+    async deleteOrder(id) {
+      await axios.post('http://localhost:8000/removeOrder', {
+          order_id: id,
+          jwt: localStorage.getItem('token')
+        }
+      )
+      const orders = await axios.get(`http://localhost:8000/getOrdersAll?jwt=${localStorage.getItem('token')}`)
+      this.orders = orders.data
     }
   },
   async mounted() {
@@ -180,6 +186,7 @@ export default {
     }
     &__info {
       display: flex;
+      flex-direction: column;
       gap: 20px;
       border-left: 1px solid #212121;
       padding: 0 20px;
@@ -189,6 +196,9 @@ export default {
     }
     &__description {
       font-size: 24px;
+      width: 120px;
+      white-space: break-spaces;
+      word-break: break-word;
     }
     &__price {
       color: #b4805b;
