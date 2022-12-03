@@ -1,6 +1,6 @@
 <template>
   <div class="card">
-    <img class="card__img" :src="product.img" alt="изображение еды">
+    <img class="card__img" :src="product.img" alt="изображение еды" width='256' height='200'>
     <h2 class="card__title">{{product.title}}</h2>
     <p class="card__text">{{product.description}}</p>
     <span class='card__price'>{{product.price}}Р</span>

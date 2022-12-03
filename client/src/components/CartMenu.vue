@@ -38,15 +38,12 @@ export default {
       this.DELETE_FROM_CART(index)
     },
     addOrder() {
-      console.log({
-        jwt: localStorage.getItem('token'),
-        products: this.cart_data
-      })
       axios.post('http://localhost:8000/addOrder', {
           jwt: localStorage.getItem('token'),
           products: this.cart_data
         }
       )
+      this.$store.dispatch('cart', [])
     }
   }
 
