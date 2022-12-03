@@ -37,7 +37,7 @@ module.exports = async function (req, res) {
 
                     const user = await User.findByPk(order.UserId);
                     
-                    entry = {};
+                    let entry = {};
 
                     entry.order_id = order.id;
                     entry.owner_login = user.login;
