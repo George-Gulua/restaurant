@@ -46,7 +46,10 @@ module.exports = async function (req, res) {
 
                     for (const cart of carts) {
                         const product = await Product.findByPk(cart.ProductId);
-                        entry.products.push(product);
+                        entry.products.push({
+                            ...product,
+                            product_quantity: cart.product_quantity,
+                        });
                     }
 
                     response.push(entry);
