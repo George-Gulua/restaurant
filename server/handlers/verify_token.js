@@ -2,10 +2,7 @@
 const jwt = require("jsonwebtoken");
 const { StatusCode } = require('status-code-enum')
 
-function generateJWT(data) {
-    return jwt.sign(data, process.env.TOKEN_SECRET);
-}
-
+const User = require('../models/user');
 
 module.exports = async function (req, res) {
     if (!req.body) {
@@ -17,7 +14,16 @@ module.exports = async function (req, res) {
 
     if (token) {
         try {
-            jwt.verify(token, process.env.TOKEN_SECRET)
+            const jwt_data = jwt.verify(token, process.env.TOKEN_SECRET);
+            const user = await User.findOne({
+                ...jwt_data.user,
+            });
+
+            if (user === null) {
+                res.status(StatusCode.ClientErrorConflict).json();
+                return;
+            }
+
             res.status(StatusCode.SuccessOK).json();
             return;
         } catch (error) {

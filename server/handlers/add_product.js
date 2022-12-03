@@ -1,7 +1,7 @@
 'use strict';
 const jwt = require("jsonwebtoken");
 const roles = require('../enum/roles');
-const { StatusCode } = require('status-code-enum')
+const { StatusCode } = require('status-code-enum');
 
 const Product = require('../models/product');
 
