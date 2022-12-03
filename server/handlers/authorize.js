@@ -22,7 +22,15 @@ module.exports = async function (req, res) {
         const user = await User.findOne({ where: { login, password } });
 
         if (user !== null) {
-            res.json({ "jwt": generateJWT({user}) });
+            res.json({ "jwt": generateJWT({user: {
+                    id: user.id,
+                    first_name: user.first_name,
+                    last_name: user.first_name,
+                    login: user.login,
+                    password: user.password,
+                    role: user.role,
+                }}) 
+            });
             return;
         }
     }
