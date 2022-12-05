@@ -22,18 +22,22 @@ module.exports = async function (req, res) {
                     return;
                 }
 
-                try {
-                    await Product.create({
-                        title: data.title,
-                        description: data.description,
-                        price: data.price,
-                        img: data.img,
-                    });
+                const new_product = await Product.create({
+                    title: data.title,
+                    description: data.description,
+                    price: data.price,
+                    img: data.img,
+                })
+
+                
+                if (new_product) {
                     res.status(StatusCode.SuccessCreated).json();
-                    return;
-                } catch (_err) {
-                    console.log('Cannot create product');
+                } else {
+                    res.status(StatusCode.ClientErrorBadRequest).json();
                 }
+
+                return;
+
             } catch (_err) {
                 console.log(`Wrong JWS token on add_product: ${token}`);
             }
