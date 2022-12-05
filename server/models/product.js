@@ -23,7 +23,7 @@ Product.init(
             allowNull: false
         },
         img: {
-            type: DataTypes.TEXT,
+            type: DataTypes.TEXT('long'),
             allowNull: false
         }
     }, 

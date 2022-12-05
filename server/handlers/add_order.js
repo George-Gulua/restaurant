@@ -31,8 +31,7 @@ module.exports = async function (req, res) {
                                 product_quantity: product.product_quantity,
                             });
                         }
-                        res.status(StatusCode.SuccessCreated).json();
-                        return;
+                        return res.status(StatusCode.SuccessCreated).json();
                     } catch(_err) {
                         await Order.destroy({
                             where: {
@@ -45,10 +44,10 @@ module.exports = async function (req, res) {
                     console.log(`Cannot create order for user: ${user.id}`);
                 }
             } catch (_err) {
-                console.log(`Wrong JWS token on add_order: ${token}`);
+                console.log(`Wrong JWT token on add_order: ${token}`);
             }
         }
     }
 
-    res.status(StatusCode.ClientErrorBadRequest).json();
+    return res.status(StatusCode.ClientErrorBadRequest).json();
 }

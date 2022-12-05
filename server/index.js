@@ -22,7 +22,7 @@ module.exports = function main(options, cb) {
 
     // Common middleware
     app.use(cors());
-    app.use(express.json());
+    app.use(express.json({limit: "50mb"}));
 
     const logger = pino();
     app.use(pinoHttp({ logger }));

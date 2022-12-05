@@ -18,31 +18,27 @@ module.exports = async function (req, res) {
                 const user = jwt_data.user;
 
                 if (user.role !== roles.ADMIN) {
-                    res.status(StatusCode.ClientErrorUnauthorized).json();
-                    return;
+                    return res.status(StatusCode.ClientErrorUnauthorized).json();
                 }
 
-                const new_product = await Product.create({
-                    title: data.title,
-                    description: data.description,
-                    price: data.price,
-                    img: data.img,
-                })
+                try {
+                    await Product.create({
+                        title: data.title,
+                        description: data.description,
+                        price: data.price,
+                        img: data.img,
+                    });
 
-                
-                if (new_product) {
-                    res.status(StatusCode.SuccessCreated).json();
-                } else {
-                    res.status(StatusCode.ClientErrorBadRequest).json();
+                    return res.status(StatusCode.SuccessCreated).json();
                 }
-
-                return;
-
+                catch (err) {
+                    console.log(err);
+                }
             } catch (_err) {
-                console.log(`Wrong JWS token on add_product: ${token}`);
+                console.log(`Wrong JWT token on add_product: ${token}`);
             }
         }
     }
 
-    res.status(StatusCode.ClientErrorBadRequest).json();
+    return res.status(StatusCode.ClientErrorBadRequest).json();
 }

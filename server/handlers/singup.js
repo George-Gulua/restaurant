@@ -12,8 +12,7 @@ module.exports = async function (req, res) {
             const user = await User.findOne({ where: { "login": data.login } });
 
             if (user !== null) {
-                res.status(StatusCode.ClientErrorBadRequest).json({ "reason": "User already exists"});
-                return;
+                return res.status(StatusCode.ClientErrorBadRequest).json({ "reason": "User already exists"});
             }
 
             try {
@@ -30,5 +29,5 @@ module.exports = async function (req, res) {
         }
     }
 
-    res.status(StatusCode.ClientErrorBadRequest).json();
+    return res.status(StatusCode.ClientErrorBadRequest).json();
 }

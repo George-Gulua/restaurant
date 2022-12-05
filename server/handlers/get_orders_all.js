@@ -22,8 +22,7 @@ module.exports = async function (req, res) {
             const user = jwt_data.user;
 
             if (user.role !== roles.ADMIN) {
-                res.status(StatusCode.ClientErrorForbidden).json();
-                return;
+                return res.status(StatusCode.ClientErrorForbidden).json();
             }
 
             let response = [];
@@ -57,17 +56,15 @@ module.exports = async function (req, res) {
 
                 } catch(err) {
                     console.log(err);
-                    res.status(StatusCode.ServerErrorInternal).json();
-                    return;
+                    return res.status(StatusCode.ServerErrorInternal).json();
                 }
             }
 
-            res.status(StatusCode.SuccessOK).json(response);
-            return;
+            return res.status(StatusCode.SuccessOK).json(response);            
         } catch (error) {
-            console.log(`Wrong JWS token on get_orders_all: ${token}`);
+            console.log(`Wrong JWT token on get_orders_all: ${token}`);
         }
     }
 
-    res.status(StatusCode.ClientErrorUnauthorized).json();
+    return res.status(StatusCode.ClientErrorUnauthorized).json();
 }

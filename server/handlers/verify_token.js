@@ -6,8 +6,7 @@ const User = require('../models/user');
 
 module.exports = async function (req, res) {
     if (!req.body) {
-        res.status(StatusCode.ClientErrorBadRequest).json();
-        return;
+        return res.status(StatusCode.ClientErrorBadRequest).json();
     }
 
     const token = req.body.jwt;
@@ -20,16 +19,14 @@ module.exports = async function (req, res) {
             });
 
             if (user === null) {
-                res.status(StatusCode.ClientErrorConflict).json();
-                return;
+                return res.status(StatusCode.ClientErrorConflict).json();
             }
 
-            res.status(StatusCode.SuccessOK).json();
-            return;
+            return res.status(StatusCode.SuccessOK).json();
         } catch (error) {
             console.log(`Wrong JWS token on verify_token: ${token}`);
         }
     }
 
-    res.status(StatusCode.ClientErrorUnauthorized).json();
+    return res.status(StatusCode.ClientErrorUnauthorized).json();
 }

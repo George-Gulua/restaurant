@@ -9,13 +9,12 @@ module.exports = async function (req, res) {
 
         if (token) {
             try {
-                res.json(jwt.verify(token, process.env.TOKEN_SECRET));
-                return;
+                return res.json(jwt.verify(token, process.env.TOKEN_SECRET));
             } catch (error) {
-                console.log(`Wrong JWS token on get_user: ${token}`);
+                console.log(`Wrong JWT token on get_user: ${token}`);
             }
         }
     }
     
-    res.status(StatusCode.ClientErrorBadRequest).json();
+    return res.status(StatusCode.ClientErrorBadRequest).json();
 }

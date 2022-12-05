@@ -7,8 +7,7 @@ const Product = require('../models/Product');
 
 module.exports = async function (req, res) {
     if (!req.body) {
-        res.status(StatusCode.ClientErrorBadRequest).json();
-        return;
+        return res.status(StatusCode.ClientErrorBadRequest).json();
     }
 
     const token = req.body.jwt;
@@ -19,8 +18,7 @@ module.exports = async function (req, res) {
             const user = jwt_data.user;
 
             if (user.role !== roles.ADMIN) {
-                res.status(StatusCode.ClientErrorForbidden).json();
-                return;
+                return res.status(StatusCode.ClientErrorForbidden).json();
             }
 
             const product_id = req.body.product_id;
@@ -29,18 +27,15 @@ module.exports = async function (req, res) {
                 await Product.destroy({where : {
                     id: product_id
                 }});
-                res.status(StatusCode.SuccessOK).json();
+                return res.status(StatusCode.SuccessOK).json();
             } catch (_err) {
                 console.log(`Cannot remove product with id: ${product_id}`);
-                res.status(StatusCode.ClientErrorBadRequest).json();
+                return res.status(StatusCode.ClientErrorBadRequest).json();
             }
-
-            return;
-
         } catch (error) {
-            console.log(`Wrong JWS token on remove_product: ${token}`);
+            console.log(`Wrong JWT token on remove_product: ${token}`);
         }
     }
 
-    res.status(StatusCode.ClientErrorUnauthorized).json();
+    return res.status(StatusCode.ClientErrorUnauthorized).json();
 }

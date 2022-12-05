@@ -11,8 +11,7 @@ function generateJWT(data) {
 
 module.exports = async function (req, res) {
     if (!req.body) {
-        res.status(StatusCode.ClientErrorBadRequest).json();
-        return;
+        return res.status(StatusCode.ClientErrorBadRequest).json();
     }
 
     const login = req.body.login;
@@ -22,7 +21,7 @@ module.exports = async function (req, res) {
         const user = await User.findOne({ where: { login, password } });
 
         if (user !== null) {
-            res.json({ "jwt": generateJWT({user: {
+            return res.json({ "jwt": generateJWT({user: {
                     id: user.id,
                     first_name: user.first_name,
                     last_name: user.first_name,
@@ -31,9 +30,8 @@ module.exports = async function (req, res) {
                     role: user.role,
                 }}) 
             });
-            return;
         }
     }
 
-    res.status(StatusCode.ClientErrorUnauthorized).json();
+    return res.status(StatusCode.ClientErrorUnauthorized).json();
 }
