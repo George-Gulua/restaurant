@@ -16,17 +16,16 @@ module.exports = async function (req, res) {
                 return;
             }
 
-            const new_user = await User.create({
-                first_name: data.first_name,
-                last_name: data.last_name,
-                login: data.login,
-                password: data.password,
-                role: roles.USER,
-            })
-
-            if (new_user) {
-                res.status(StatusCode.SuccessCreated).json();
-                return;
+            try {
+                await User.create({
+                    first_name: data.first_name,
+                    last_name: data.last_name,
+                    login: data.login,
+                    password: data.password,
+                    role: roles.USER,
+                });
+            } catch (_err) {
+                console.log('Cannot create new user');
             }
         }
     }
