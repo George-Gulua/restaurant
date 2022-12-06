@@ -155,10 +155,6 @@ export default {
     display: flex;
     flex-direction: column;
     gap: 20px;
-
-    &__title {
-
-    }
     &__field {
       padding: 12px;
       border: none;
@@ -179,9 +175,10 @@ export default {
     &__item {
       display: flex;
       align-items: center;
-      background: #F1F1F1;
+      background: #ffffff;
       padding: 20px;
       border-radius: 4px;
+      box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     }
     &__info {
       display: flex;
@@ -226,11 +223,12 @@ export default {
     }
     &__item {
       display: flex;
-      background: #F1F1F1;
+      background: #ffffff;
       padding: 20px;
       border-radius: 4px;
       gap: 20px;
       flex-direction: column;
+      box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     }
     &__info {
       display: flex;

@@ -1,7 +1,7 @@
 <template>
   <div class="menu">
     <div class="container">
-      <h2 class="menu__title">Наше меню</h2>
+      <h2 class="menu__title">Наши товары</h2>
       <div class="list-items">
         <card-item v-for='product in products' :key='product.id' :product='product' @addProduct='addProduct'/>
       </div>
@@ -29,7 +29,6 @@ export default {
   },
   async mounted() {
     const { data } = await axios.get('http://localhost:8000/getProductsAll')
-    console.log(data)
     this.products = data
   },
   methods: {
@@ -38,7 +37,6 @@ export default {
     ]),
     addProduct(data) {
       this.ADD_TO_CART(data)
-      console.log(this.cart)
     }
   },
   computed: {

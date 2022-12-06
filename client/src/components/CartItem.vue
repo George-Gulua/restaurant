@@ -52,10 +52,10 @@ export default {
   }
   &__title {
     font-size: 24px;
-    border-bottom: 3px solid #d39c72;
+    border-bottom: 3px solid #00BFFF;
   }
   &__price {
-    color: #b4805b;
+    color: #00BFFF;
     font-size: 24px;
     font-weight: 700;
   }
