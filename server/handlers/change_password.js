@@ -30,8 +30,6 @@ module.exports = async function (req, res) {
                 console.log(err);
                 return res.status(StatusCode.ServerErrorInternal).json();
             }
-
-            
         } catch (error) {
             console.log(`Wrong JWT token on verify_token: ${token}`);
         }

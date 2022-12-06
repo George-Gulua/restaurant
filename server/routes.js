@@ -9,6 +9,7 @@ const remove_order = require('./handlers/remove_order');
 const verify_token = require('./handlers/verify_token');
 const remove_product = require('./handlers/remove_product');
 const get_orders_all = require('./handlers/get_orders_all');
+const change_password = require('./handlers/change_password');
 const get_products_all = require('./handlers/get_products_all');
 
 
@@ -24,5 +25,5 @@ module.exports = function (app, opts) {
     app.post('/verifyToken', verify_token);
     app.post('/removeOrder', remove_order);
     app.post('/removeProduct', remove_product);
-    
+    app.post('/changePassword', change_password);
 }
