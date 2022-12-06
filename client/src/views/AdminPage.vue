@@ -137,7 +137,6 @@ export default {
     this.products = products.data
     const orders = await axios.get(`http://localhost:8000/getOrdersAll?jwt=${localStorage.getItem('token')}`)
     this.orders = orders.data
-    console.log(orders.data)
   }
 }
 </script>
