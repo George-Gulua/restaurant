@@ -1,13 +1,8 @@
 'use strict';
-const jwt = require("jsonwebtoken");
+const generateJWT = require("../utils/generate_jwt");
 const { StatusCode } = require('status-code-enum')
 
 const User = require('../models/user');
-
-
-function generateJWT(data) {
-    return jwt.sign(data, process.env.TOKEN_SECRET);
-}
 
 module.exports = async function (req, res) {
     if (!req.body) {
@@ -21,15 +16,7 @@ module.exports = async function (req, res) {
         const user = await User.findOne({ where: { login, password } });
 
         if (user !== null) {
-            return res.json({ "jwt": generateJWT({user: {
-                    id: user.id,
-                    first_name: user.first_name,
-                    last_name: user.first_name,
-                    login: user.login,
-                    password: user.password,
-                    role: user.role,
-                }}) 
-            });
+            return res.json({ "jwt": generateJWT(user) });
         }
     }
 
