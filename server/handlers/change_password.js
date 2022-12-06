@@ -24,7 +24,7 @@ module.exports = async function (req, res) {
             }
 
             try {
-                await user.update({passowrd: req.body.new_password});
+                await user.update({password: req.body.new_password});
                 return res.status(StatusCode.SuccessOK).json({ jwt: generateJWT(user) });
             } catch (err) {
                 console.log(err);
