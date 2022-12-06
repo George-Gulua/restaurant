@@ -23,6 +23,7 @@ module.exports = async function (req, res) {
                     password: data.password,
                     role: roles.USER,
                 });
+                return res.json();
             } catch (_err) {
                 console.log('Cannot create new user');
             }
