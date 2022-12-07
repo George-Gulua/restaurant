@@ -20,13 +20,16 @@ export default new Vuex.Store({
     user(state, user) {
       state.user = user
     },
+    cart(state, cart) {
+      state.cart = cart
+    },
     setCart(state, product) {
       if(state.cart.length) {
         let isProductExists = false;
         state.cart.map(item => {
           if (item.id === product.id) {
             isProductExists = true
-            item.quantity++
+            item.product_quantity++
           }
         })
         if (!isProductExists) {
@@ -50,6 +53,9 @@ export default new Vuex.Store({
     },
     DELETE_FROM_CART({commit}, index) {
       commit('removeFromCart', index)
+    },
+    cart(context, cart) {
+      context.commit('cart', cart)
     }
   },
   modules: {}

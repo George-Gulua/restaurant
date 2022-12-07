@@ -19,6 +19,10 @@ export default new Router({
       component: () => import('@/views/RegisterPage')
     },
     {
+      path: '/profile',
+      component: () => import('@/views/ProfilePage')
+    },
+    {
       path: '/admin',
       component: () => import('@/views/AdminPage')
     },
